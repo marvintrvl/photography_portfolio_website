@@ -1,0 +1,35 @@
+<!-- /photos/templates/photos/index.html -->
+{% extends "photos/base.html" %}
+
+{% block title %}Photography Website - Home{% endblock %}
+
+{% block content %}
+<!-- Picture of Me -->
+<div class="text-center">
+    <img src="/static/my-photo.jpg" class="rounded-full w-40 h-40 mx-auto mb-4">
+</div>
+<!-- Short Description -->
+<div class="flex justify-center">
+<p class="text-lg mb-8 w-7/12 text-justify">
+    As a child, I fell in love with the captivating world of photography. What started as a simple fascination quickly grew into a lifelong passion. Since 2019, I have been capturing moments and telling stories through the lens of my professional camera.
+
+    Photography is not just a hobby for me; it's a way of life. I pour my heart and soul into every shot, aiming to inspire and evoke emotions in those who view my art. Through my photographs, I strive to ignite a sense of wonder and appreciation for the beauty that surrounds us.
+
+    I am constantly seeking new adventures, whether it's exploring breathtaking landscapes or capturing the essence of everyday life through street photography. Each click of the shutter is an opportunity to freeze a moment in time and share it with the world.
+
+    Join me on this visual journey as I continue to push the boundaries of creativity and capture the essence of life through my lens. Let my photographs transport you to new places, evoke emotions, and inspire you to see the world through a different perspective.
+</p>
+</div>
+
+<!-- Recently Uploaded Photos -->
+<h2 class="text-2xl font-bold mb-4">Recently Uploaded Photos</h2>
+<div class="p-5 sm:p-8">
+        <div class="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 lg:columns-4 [&>img:not(:first-child)]:mt-8">
+            {% for photo in recent_photos %}
+            <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="object-cover w-full h-full rounded">
+            {% endfor %}
+        </div>
+</div>
+  
+  
+{% endblock %}
