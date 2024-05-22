@@ -45,14 +45,14 @@ This is a Django project for creating a photography portfolio website. It allows
     - Open the `/photos/static/` directory.
     - Create directories for your desired categories and subcategories.
     - Add your photos into the respective subcategories.
-    - Omportant: Name folder exactly like the name of the category and put the subcategories in them and ONLY add photos in the subcategories
+    - Important: Name folder exactly like the name of the category and put the subcategories in them and ONLY add photos in the subcategories
 
 7. Run the script to add the photos to the database:
 
-    - Navigate to photography_portfolio_website/photos/management/commands and then run this command
+    - Navigate to /photography_portfolio_website/ (ROOT Directory) and then run this command
 
     ```bash
-    python manage.py add_photos
+    python manage.py import_photos
     ```
 
 8. Start the development server:
