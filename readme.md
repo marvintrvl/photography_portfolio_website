@@ -88,7 +88,3 @@ This is a Django project for creating a photography portfolio website. It allows
     URL: /static/ Directory: /home/your_username/photography_portfolio_website/static/	 
     URL: /media/ Directory: /home/your_username/photography_portfolio_website/media/
     ```
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
