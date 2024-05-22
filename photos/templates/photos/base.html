@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/54f7ea8559.js" crossorigin="anonymous"></script>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <title>{% block title %}Photography Website{% endblock %}</title>
 </head>
 <body class="bg-gray-900 min-h-screen min-w-full">
-    <header>
+<header class="header">
     <nav class="bg-gray-800 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -21,7 +21,14 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         {% for category in categories %}
-                        <a href="{% url 'photos:category_view' category.name %}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{ category.name }}</a>
+                            <div class="relative group">
+                                <button class="category-button text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium no-click">{{ category.name }}</button>
+                                <div class="subcategory-dropdown absolute z-10 hidden bg-gray-800 divide-y divide-gray-100 rounded-md shadow-lg mt-1 w-48 group-hover:block">
+                                    {% for subcategory in category.subcategories.all %}
+                                        <a href="{% url 'photos:subcategory_view' category.name subcategory.name %}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">{{ subcategory.name }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -38,38 +45,78 @@
                 </div>
             </div>
         </div>
-        <div class="md:hidden" id="mobile-menu">
+        <div class="md:hidden hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {% for category in categories %}
-                <a href="{% url 'photos:category_view' category.name %}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">{{ category.name }}</a>
+                    <div class="relative">
+                        <button class="category-button text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-center">{{ category.name }}</button>
+                        <div class="touch-dropdown bg-gray-800 divide-y divide-gray-100 rounded-md shadow-lg mt-1 w-full">
+                            {% for subcategory in category.subcategories.all %}
+                                <a href="{% url 'photos:subcategory_view' category.name subcategory.name %}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white text-center">{{ subcategory.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
         </div>
     </nav>
-    </header>
-    <!-- Main Content -->
-    <main class="bg-gray-700">
+</header>
+<!-- Main Content -->
+<main class="bg-gray-700">
     <div class="mx-auto px-4 py-8 bg-gray-700 text-white">
         {% block content %}
         <!-- Main Content of Each Page -->
         {% endblock %}
     </div>
-    </main>
-    <!-- Footer -->
-    <footer class="py-4 bg-gray-800 text-white text-center mt-auto">
-        <p class="mb-2">Follow me on Instagram:</p>
-        <a href="https://instagram.com/marvin.trvl" class="text-blue-500">
-            <i class="fab fa-instagram text-4xl text-gray-400"></i>
-        </a>
-    </footer>
-    <script>
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenuButton.querySelector('svg:first-child').classList.toggle('hidden');
-            mobileMenuButton.querySelector('svg:last-child').classList.toggle('hidden');
+</main>
+<!-- Footer -->
+<footer class="py-4 bg-gray-800 text-white text-center mt-auto">
+    <p class="mb-2">Follow me on Instagram:</p>
+    <a href="https://instagram.com/marvin.trvl" class="text-blue-500">
+        <i class="fab fa-instagram text-4xl text-gray-400"></i>
+    </a>
+</footer>
+<script>
+// Mobile Menu
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+
+mobileMenuButton.addEventListener('click', () => {
+    const isHidden = mobileMenu.classList.toggle('hidden');
+    mobileMenuButton.querySelector('svg:first-child').classList.toggle('hidden', !isHidden);
+    mobileMenuButton.querySelector('svg:last-child').classList.toggle('hidden', isHidden);
+});
+
+// Subcategory Dropdowns for Desktop
+const desktopCategoryButtons = document.querySelectorAll('.category-button');
+
+desktopCategoryButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+        if (window.innerWidth >= 768) {
+            event.preventDefault(); // Prevent default behavior for click events
+        }
+    });
+});
+
+// Subcategory Dropdowns for Mobile
+const categoryButtons = document.querySelectorAll('.category-button');
+const dropdowns = document.querySelectorAll('.touch-dropdown');
+
+categoryButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const dropdown = button.nextElementSibling;
+
+        // Close all other open dropdowns
+        dropdowns.forEach(openDropdown => {
+            if (openDropdown !== dropdown) {
+                openDropdown.classList.remove('active');
+            }
         });
-    </script>
+
+        // Toggle the clicked dropdown
+        dropdown.classList.toggle('active');
+    });
+});
+</script>
 </body>
 </html>
