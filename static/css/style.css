@@ -602,9 +602,18 @@ video {
   border-width: 0;
 }
 
+.w-9\/12 {
+  width: 75%;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+.mx-8 {
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .-mr-2 {
