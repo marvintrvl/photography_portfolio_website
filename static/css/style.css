@@ -719,6 +719,14 @@ video {
   justify-content: center;
 }
 
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
 .justify-between {
   justify-content: space-between;
 }
@@ -995,11 +1003,6 @@ video {
   margin-top: 2rem/* 32px */;
 }
 
-.header {
-  position: relative;
-  z-index: 50; /* Ensures the header has a positive z-index */
-}
-
 .relative {
   position: relative;
 }
@@ -1048,7 +1051,7 @@ video {
 
 .subcategory-dropdown {
   display: none;
-  width: 100%;
+  min-width: 100%;
 }
 
 .subcategory-dropdown.active {

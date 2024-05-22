@@ -21,14 +21,14 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         {% for category in categories %}
-                        <div class="relative group">
-                            <button class="category-button text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium no-click">{{ category.name }}</button>
-                            <div class="subcategory-dropdown absolute z-10 hidden bg-gray-800 divide-y divide-gray-100 rounded-md shadow-lg mt-1 w-48 group-hover:block">
-                                {% for subcategory in category.subcategories.all %}
-                                <a href="{% url 'photos:subcategory_view' category.name subcategory.name %}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">{{ subcategory.name }}</a>
-                                {% endfor %}
+                            <div class="relative group">
+                                <button class="category-button text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium no-click">{{ category.name }}</button>
+                                <div class="subcategory-dropdown absolute z-10 hidden bg-gray-800 divide-y divide-gray-100 rounded-md shadow-lg mt-1 w-48 group-hover:block">
+                                    {% for subcategory in category.subcategories.all %}
+                                        <a href="{% url 'photos:subcategory_view' category.name subcategory.name %}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">{{ subcategory.name }}</a>
+                                    {% endfor %}
+                                </div>
                             </div>
-                        </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -48,14 +48,14 @@
         <div class="md:hidden hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {% for category in categories %}
-                <div class="relative">
-                    <button class="category-button text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">{{ category.name }}</button>
-                    <div class="touch-dropdown bg-gray-800 divide-y divide-gray-100 rounded-md shadow-lg mt-1 w-full">
-                        {% for subcategory in category.subcategories.all %}
-                        <a href="{% url 'photos:subcategory_view' category.name subcategory.name %}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">{{ subcategory.name }}</a>
-                        {% endfor %}
+                    <div class="relative">
+                        <button class="category-button text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-center">{{ category.name }}</button>
+                        <div class="touch-dropdown bg-gray-800 divide-y divide-gray-100 rounded-md shadow-lg mt-1 w-full">
+                            {% for subcategory in category.subcategories.all %}
+                                <a href="{% url 'photos:subcategory_view' category.name subcategory.name %}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white text-center">{{ subcategory.name }}</a>
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
                 {% endfor %}
             </div>
         </div>
