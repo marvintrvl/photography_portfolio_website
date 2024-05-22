@@ -1,22 +1,21 @@
-<!-- /photos/templates/photos/category.html -->
+<!-- /photos/templates/photos/categories.html -->
 {% extends "photos/base.html" %}
-
-{% block title %}Photography Website - {{ category.name }}{% endblock %}
+{% block title %}Photography Website - {{ category.name }} - {{ subcategory.name }}{% endblock %}
 
 {% block navbar %}
-<!-- Category Name -->
-<div class="flex-grow text-center">
-    <span class="font-bold text-xl">{{ category.name }}</span>
-</div>
+
+
 {% endblock %}
 
 {% block content %}
+<div class="flex-grow text-center">
+    <span class="font-bold text-xl">{{ category.name }} - {{ subcategory.name }}</span>
+</div>
 <div class="p-5 sm:p-8">
     <div class="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 lg:columns-4 [&>img:not(:first-child)]:mt-8">
-    {% for photo in category_photos %}    
+        {% for photo in photos %}
         <img src="{{ photo.image.url }}">
-    {% endfor %}
-  </div>
+        {% endfor %}
+    </div>
 </div>
-  
 {% endblock %}

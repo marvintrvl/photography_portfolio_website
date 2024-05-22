@@ -639,6 +639,10 @@ video {
   display: flex;
 }
 
+.flex-col {
+  flex-direction: column;
+}
+
 .inline-flex {
   display: inline-flex;
 }
@@ -989,4 +993,89 @@ video {
 
 .\[\&\>img\:not\(\:first-child\)\]\:mt-8>img:not(:first-child) {
   margin-top: 2rem/* 32px */;
+}
+
+.header {
+  position: relative;
+  z-index: 50; /* Ensures the header has a positive z-index */
+}
+
+.relative {
+  position: relative;
+}
+
+.group:hover .subcategory-dropdown,
+.group:focus-within .subcategory-dropdown {
+  display: block; /* Makes the dropdown visible on hover/focus */
+}
+
+.category-button:focus,
+.category-button:hover {
+  background-color: #4a5568; /* Changes background color on hover/focus */
+}
+
+
+.divide-gray-100 > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(243 244 246 / var(--tw-divide-opacity));
+}
+
+.divide-y > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+}
+
+.absolute {
+  position: absolute;
+}
+
+.group:hover .group-hover\:block {
+  display: block;
+}
+
+.shadow-lg {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem/* 16px */ * var(--tw-space-x-reverse));
+  margin-left: calc(1rem/* 16px */ * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.subcategory-dropdown {
+  display: none;
+  width: 100%;
+}
+
+.subcategory-dropdown.active {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .subcategory-dropdown {
+      position: absolute;
+      display: none;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      width: auto;
+  }
+
+  .subcategory-dropdown.active {
+      display: block;
+  }
+}
+
+.touch-dropdown {
+  display: none;
+}
+
+.touch-dropdown.active {
+  display: block;
+}
+
+.no-click {
+  pointer-events: none;
 }
