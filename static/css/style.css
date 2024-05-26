@@ -1082,3 +1082,12 @@ video {
 .no-click {
   pointer-events: none;
 }
+
+.mx-8 {
+  margin-left: 2rem/* 32px */;
+  margin-right: 2rem/* 32px */;
+}
+
+.w-9\/12 {
+  width: 75%;
+}
