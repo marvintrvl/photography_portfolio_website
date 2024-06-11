@@ -6,6 +6,8 @@
     <script src="https://kit.fontawesome.com/54f7ea8559.js" crossorigin="anonymous"></script>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link href="{% static 'css/lightbox.css' %}" rel="stylesheet"/>
+    <script src="{% static 'js/lightbox-plus-jquery.js' %}"></script>
     <title>{% block title %}Photography Website{% endblock %}</title>
 </head>
 <body class="bg-gray-900 min-h-screen min-w-full">
@@ -63,7 +65,7 @@
 </header>
 <!-- Main Content -->
 <main class="bg-gray-700">
-    <div class="mx-auto px-4 py-8 bg-gray-700 text-white">
+    <div class="mx-auto bg-gray-700 text-white">
         {% block content %}
         <!-- Main Content of Each Page -->
         {% endblock %}

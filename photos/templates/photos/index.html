@@ -4,32 +4,59 @@
 {% block title %}Photography Website - Home{% endblock %}
 
 {% block content %}
-<!-- Picture of Me -->
-<div class="text-center">
-    <img src="/static/my-photo.jpg" class="rounded-full w-40 h-40 mx-auto mb-4">
-</div>
-<!-- Short Description -->
-<div class="flex justify-center">
-<p class="text-lg mb-8 w-9/12 text-justify">
-    As a child, I fell in love with the captivating world of photography. What started as a simple fascination quickly grew into a lifelong passion. Since 2019, I have been capturing moments and telling stories through the lens of my professional camera.
 
-    Photography is not just a hobby for me; it's a way of life. I pour my heart and soul into every shot, aiming to inspire and evoke emotions in those who view my art. Through my photographs, I strive to ignite a sense of wonder and appreciation for the beauty that surrounds us.
-
-    I am constantly seeking new adventures, whether it's exploring breathtaking landscapes or capturing the essence of everyday life through street photography. Each click of the shutter is an opportunity to freeze a moment in time and share it with the world.
-
-    Join me on this visual journey as I continue to push the boundaries of creativity and capture the essence of life through my lens. Let my photographs transport you to new places, evoke emotions, and inspire you to see the world through a different perspective.
-</p>
+<div class="hero-section flex justify-center items-center bg-gray-900 mb-16 md:mb-24">
+    <img src="/static/Hero.jpg" class="w-full h-full object-cover">
 </div>
 
-<!-- Recently Uploaded Photos -->
-<h2 class="text-2xl mx-8 font-bold mb-4">Recently Uploaded Photos</h2>
-<div class="p-5 sm:p-8">
-        <div class="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 lg:columns-4 [&>img:not(:first-child)]:mt-8">
-            {% for photo in recent_photos %}
-            <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="object-cover w-full h-full rounded">
-            {% endfor %}
+<div class="p-4 mx-auto" id="me">
+    <h2 class="text-5xl text-center font-bold mb-16 md:mb-24">About me</h2>
+    <div class="flex flex-col mb-16">
+        <div class="mb-4 md:mb-0 md:mr-4 justify-center items-center mx-4 sm:mx-8 md:mx-12 lg:mx-16">
+            <img src="/static/my-photo.jpg" class="rounded-full w-60 h-60 mx-auto mb-4">
         </div>
+        <div class="text-eg mx-4 sm:mx-8 md:mx-12 lg:mx-16 mb-8 justify-center md:justify-center items-center text-center md:text-left">
+            <p class="text-justify lg:mx-32">
+                <span class="text-3xl font-semibold">Hello,</span><br>
+                I am Marvin, a passionate photographer based in Dresden, Germany. <br> 
+                Ever since I started taking pictures in 2018, I have been on an incredible journey of growth and exploration in the world of photography. It all began with my trusty phone camera, capturing moments and scenes that caught my eye.
+
+                In 2019, I took a leap and invested in my first full-frame camera, which opened up a whole new world of possibilities.
+                Since then, I have been dedicated to honing my skills and expanding my knowledge. Each year, I challenge myself to learn new techniques and push the boundaries of my creativity.
+
+                I am proud to say that I am entirely self-taught, constantly seeking inspiration from fellow photographers and experimenting with different styles and genres. My goal is to capture images that evoke emotions and tell stories, whether it's the breathtaking beauty of landscapes, the raw and intimate moments of portraits, or the vibrant energy of street photography.
+
+                Photography has become more than just a hobby for me; it has reached a professional level where I strive to create images that leave a lasting impact. I am always seeking new opportunities and collaborations, so if you have any questions or would like to work together, please don't hesitate to reach out to me.
+
+                Thank you for joining me on this incredible journey through the lens!
+
+            </p>
+        </div>
+    </div>
+
+    <h2 class="text-5xl text-center font-bold mt-8 mb-16 md:mb-24">Galerie</h2>
+    <!-- Gallery Section -->
+    <div class="grid grid-cols-1 gap-4 md:gap-6 xl:gap-8 mx-4 sm:mx-8 md:mx-12 lg:mx-16">
+        {% for category in categories %}
+        <div class="mb-8">
+            <h3 class="text-3xl font-bold mb-4">{{ category.name }}</h3>
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-8 md:grid-cols-2 lg:grid-cols-2 mt-8">
+                {% for subcategory in category.subcategories.all|slice:":100" %}
+                {% with subcategory.photos.first as first_photo %}
+                <a href="{% url 'photos:subcategory_view' category.name subcategory.name %}" class="group relative block overflow-hidden rounded-lg bg-gray-100 shadow-lg">
+                    <img src="{{ first_photo.image.url }}" loading="lazy" alt="{{ subcategory.name }}" class="absolute inset-0 h-fulll w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50"></div>
+
+                    <span class="absolute bottom-4 left-4 text-xl text-gray-300 md:text-sm font-normal">{{ subcategory.name }}</span>
+                </a>
+                {% endwith %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>    
 </div>
-  
   
 {% endblock %}

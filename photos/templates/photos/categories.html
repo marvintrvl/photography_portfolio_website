@@ -14,7 +14,11 @@
 <div class="p-5 sm:p-8">
     <div class="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 lg:columns-4 [&>img:not(:first-child)]:mt-8">
         {% for photo in photos %}
-        <img src="{{ photo.image.url }}">
+        <div class="{% if forloop.first %}mt-0{% else %}mt-8{% endif %}">
+            <a href="{{ photo.image.url }}" data-lightbox="roadtrip">
+                <img src="{{ photo.image.url }}">
+            </a>
+        </div>
         {% endfor %}
     </div>
 </div>
